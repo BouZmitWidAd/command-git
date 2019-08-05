@@ -1,9 +1,49 @@
-<html>
-<head>
-</head>
-<body>
-<p>
-   TUTO GIT -BRANCHE DEV -V2 -COMMIT
-</p>
-</body>
-</html>
+////////////////////////////////////////////////////////////////////////////
+git add -All #ajoute les changements au commit
+git rm[fichiers] #supprime les fichiers du depot
+git add -p #permet de preciser quels morceaux de code d'un fichier sont a ajouter au commit
+git pull #met a jour les fichiers locaux a partir d'un depot distant (cela effectue un fetch puis un merge)
+git push #pousse les modifications locales sur un depot distant
+git push -f #force a pousser ses modifications locales sur un depot distant. a utiliser avec precaution
+git stash # mettre de côté ses fichiers modifiés afin de pouvoir faire un pull
+git stash pop # réintégrer les fichiers ayant été mis de côté par un stash
+git reflog # afficher toutes les actions ayant été effectuées sur le dépôt
+git reset HEAD [nom_du_fichier] # permet de retirer un fichier du stage (fichiers à committer) sans perdre ses modifs
+git reset --hard HEAD@{1} # revenir à l'état spécifié (obtenu par reflog)
+git reset --soft HEAD@{1} # revenir à l'état spécifié (obtenu par reflog), mais en gardant ses dernières modifications
+git branch [branche] # créer une branche
+git checkout [branche] # switcher d'une branche à une autre
+git checkout [branche_distante] # récupère une branche distante (raccourci)
+git checkout -b [branche] # crée une branche et fait un checkout sur cette dernière (raccourci)
+git push origin [branche] # pousse cette branche sur le dépôt distant précisé
+git branch -d [branche] # supprime une branche en local
+git push origin :[branche_distante] # supprime une branche sur le dépôt distant
+git branch --track [branche] origin/[nom_de_la_branche] # récupère une branche distante
+git merge [branche] --no-ff # fusionne les modifications de la branche donnée sur la branche en cours, pas d'avance rapide
+git log --pretty="%s" --no-merges v1..v2 # affiche les différences entre deux tags, à la ligne et sans les merge
+git log --all --grep='my-feature' # retrouve les commits contenant le texte donné dans son message de commit
+git log --pretty=oneline -S'some code'
+git blame [fichier] -L 1,5 # affiche l'utilisateur ayant modifié les lignes 1 à 5 du fichier spécifié
+git commit --amend -m "new commit name" # modifie le dernier commit (ne pas avoir poussé auparavant)
+git fetch -p # après récupération des branches distantes, supprime les branches n'existant plus sur le dépôt distant
+git cherry-pick <commit> # permet de transférer un commit en particulier d'une branche à une autre
+    git tag # affiche la liste des tags
+    git tag 1.0 # crée le tag 1.0
+    git push --tags # pousse les tags créés
+    git branch -m [nouveau_nom] # renomme la branche courante
+    git merge --squash [branche] # merge les commits provenant d'une autre branche en les regroupant en un seul commit
+    git tag -l | xargs git tag -d && git fetch -t # supprime les tags en local et récupère les remote tags
+    git clean -fd # supprime les fichiers et répertoires non trackés
+    ////////////////////////////////////CONFIGURATION/////////////////////////////////////////////////
+    git config -e # édition de la configuration du projet
+    git config -e --global # édition de la configuration globale de Git
+    git config -l --global # liste la configuration globale de Git
+    git config --global user.name "bouzmitwidad" # paramétrage du nom de l'utilisateur
+    git config --global user.email bouzmitwidad7@gmail.com # paramétrage de l'email de l'utilisateur
+    git config --global color.ui true # active la coloration au sein du terminal
+    git config --global push.default current # force à pousser seulement la branche courante
+    git config --global core.editor vi # indique l'éditeur par défaut (messages de commit, résolution de conflits, édition de la configuration...)
+    git config --global pull.rebase true # rebase auto lors d'un pull
+    git config --global help.autocorrect 1 # lance la commande en cas de typo si il n'y a qu'une seule commande qui peut matcher
+    git config core.filemode false # les droits des fichiers ne seront pas pris en compte
+    git config core.excludesfile ~/.gitignore # exclure des fichiers sans polluer le .gitignore du projet
